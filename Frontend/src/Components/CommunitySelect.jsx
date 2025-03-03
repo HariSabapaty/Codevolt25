@@ -1,48 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './Communities.css';
+import React, { useState } from 'react';
+import { Container, Row, Col, Card, Button, Navbar } from 'react-bootstrap';
 
-const CommunitySelect = () => {
-  const [communities, setCommunities] = useState([]);
-  const navigate = useNavigate();
+const CommunityPage = () => {
+  const [communities] = useState([
+    { id: 1, name: 'Sunset Valley', area: 'North Zone' },
+    { id: 2, name: 'Riverside', area: 'East Zone' },
+    { id: 3, name: 'Greenfield', area: 'West Zone' },
+    { id: 4, name: 'Hilltop Haven', area: 'South Zone' },
+  ]);
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/communities')
-      .then(response => {
-        setCommunities(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching communities:', error);
-      });
-  }, []);
-
-  const handleSelectCommunity = (community) => {
-    navigate(`/community/${community.id}`, { state: { community } });
+  const handleJoinCommunity = (community) => {
+    console.log('Joined Community:', community.name);
+    // Add your join logic here
   };
 
   return (
-    <div className="communities-page">
-      <nav className="navbar">
-        <h1>Community Page</h1>
-      </nav>
+    <Container fluid className="p-0 bg-dark min-vh-100">
+      <Navbar bg="dark" variant="dark" className="justify-content-center mb-4">
+        <Navbar.Brand className="fs-3 fw-bold">🌆 Community Page</Navbar.Brand>
+      </Navbar>
 
-      <h2>Select Your Community</h2>
+      <h2 className="text-center text-light mb-5">Select Your Community</h2>
 
-      <div className="community-grid">
+      <Row className="g-4 justify-content-center">
         {communities.map((community) => (
-          <div 
-            key={community.id} 
-            className="community-card"
-            onClick={() => handleSelectCommunity(community)}
-          >
-            <h3>{community.name}</h3>
-            <p>{community.area}</p>
-          </div>
+          <Col key={community.id} md={6} lg={4} xl={3}>
+            <Card
+              className="shadow-lg community-card"
+            >
+              <Card.Body className="text-center">
+                <Card.Title className="fs-4 fw-bold">{community.name}</Card.Title>
+                <Card.Text className="text-muted">{community.area}</Card.Text>
+                <Button variant="primary" onClick={() => handleJoinCommunity(community)}>
+                  Join
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+
+      <style>
+        {`
+          .community-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 15px;
+          }
+          .community-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(255, 255, 255, 0.2);
+          }
+        `}
+      </style>
+    </Container>
   );
 };
 
-export default CommunitySelect;
+export default CommunityPage;

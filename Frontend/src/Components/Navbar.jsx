@@ -62,11 +62,11 @@ const CustomNavbar = () => {
             </Nav.Link>
             <Nav.Link 
               as={Link}
-              to="/contactus"
-              className={activeLink === 'contactus' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink("contactus")}
+              to="/communityselect"
+              className={activeLink === 'community' ? 'active navbar-link' : 'navbar-link'}
+              onClick={() => onUpdateActiveLink("community")}
             >
-            Contactus
+            Community
             </Nav.Link>
             
           </Nav>
