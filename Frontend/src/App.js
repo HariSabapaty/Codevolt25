@@ -7,7 +7,7 @@ import Skills from './Components/Skills';
 import Login from './Components/Login';
 import Log from './Components/Log';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Blog from './Components/Blog';
+
 import Model from './Components/Model';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
               <Banner />
               <Skills />
               <Login />
-    
+              
             </>
           } 
         />

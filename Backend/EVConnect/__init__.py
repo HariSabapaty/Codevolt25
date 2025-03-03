@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from EVConnect.config import Config
-
+from flask_cors import CORS
 
 db = SQLAlchemy()
 
@@ -11,7 +11,7 @@ from EVConnect.models import *
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
-
+    CORS(app, origins='*')
     #Initialisation
     db.init_app(app)
         
