@@ -22,7 +22,7 @@ function App() {
               <Banner />
               <Skills />
               <Login />
-              <Blog/>
+    
             </>
           } 
         />
