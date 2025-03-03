@@ -39,7 +39,7 @@ const Log = () => {
         const result = await response.json();
         console.log(`${isSignup ? 'Signup' : 'Login'} successful:`, result);
         setFormDetails({ name: '', email: '', password: '' }); 
-        navigate('/todo');
+        navigate('/');
       } else {
         const errorData = await response.json();
         setError(errorData.message || `${isSignup ? 'Signup' : 'Login'} failed`);
