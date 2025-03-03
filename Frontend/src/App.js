@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Skills from './Components/Skills';
 import Login from './Components/Login';
 import Log from './Components/Log';
+import InsightsDashboard from './Components/Insights';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Model from './Components/Model';
@@ -27,6 +28,7 @@ function App() {
           } 
         />
         <Route path="/login" element={<Log />} />
+        <Route path="/insights" element={<InsightsDashboard />} />
       </Routes>
     </Router>
   );
