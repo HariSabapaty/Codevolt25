@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Skills from './Components/Skills';
 import Login from './Components/Login';
 import Log from './Components/Log';
-import Todo from './Components/Todo';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Blog from './Components/Blog';
 import Model from './Components/Model';
 
 function App() {
@@ -22,17 +22,13 @@ function App() {
               <Banner />
               <Skills />
               <Login />
+              <Blog/>
             </>
           } 
         />
         <Route path="/login" element={<Log />} />
-        <Route path="/todo" element={<Todo />} />
       </Routes>
     </Router>
   );
 }
-
 export default App;
-
-
-
