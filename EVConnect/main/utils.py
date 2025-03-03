@@ -1,0 +1,1 @@
+#define any function that you may want to use
