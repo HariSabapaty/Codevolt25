@@ -26,6 +26,7 @@ class User(db.Model):
     questions = db.relationship('Question', backref='user', lazy=True)
     answers = db.relationship('Answer', backref='user', lazy=True)
     communities = db.relationship('Community', secondary='user_communities', back_populates="users")
+    
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -75,6 +76,16 @@ class Answer(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     timestamp = db.Column(db.DateTime, server_default=db.func.now())
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'community_id': self.community_id,
+            'user': self.user,
+            'timestamp': self.timestamp,
+            'answers': []  # Placeholder — can be linked to an Answer model later
+        }
 
     def __repr__(self):
         return f'<Answer {self.id}>'

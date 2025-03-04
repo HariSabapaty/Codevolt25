@@ -1,37 +1,65 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button, Navbar } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { Container, Row, Col, Card, Navbar, Button } from 'react-bootstrap';
 
-const CommunityPage = () => {
-  const [communities] = useState([
-    { id: 1, name: 'Sunset Valley', area: 'North Zone' },
-    { id: 2, name: 'Riverside', area: 'East Zone' },
-    { id: 3, name: 'Greenfield', area: 'West Zone' },
-    { id: 4, name: 'Hilltop Haven', area: 'South Zone' },
-  ]);
+const CommunitySelect = () => {
+  const location = useLocation();
+  const userEmail = location.state?.user_email;  // Access the user email
+  const [communities, setCommunities] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetching the list of communities
+    axios.get('http://127.0.0.1:5000/communityselect')
+      .then(response => {
+        setCommunities(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching communities:', error);
+      });
+  }, []);
 
   const handleJoinCommunity = (community) => {
-    console.log('Joined Community:', community.name);
-    // Add your join logic here
+    console.log("now");
+    console.log(userEmail);  // Log the user email for verification
+
+
+    // Sending the community_id and user_email to the backend
+    axios.post('http://127.0.0.1:5000/join_community', { community_id: community.id, user_email: userEmail })
+      .then((response) => {
+        // Navigate to CommunityPage, passing community data and user_email
+        navigate('/communitypage', {
+          state: { 
+            community: response.data.community,  // Pass the community details
+            user_email: userEmail                // Pass the user email as well
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error joining community:', error);
+      });
   };
 
   return (
-    <Container fluid className="p-0 bg-dark min-vh-100">
+    <Container fluid className="p-0">
       <Navbar bg="dark" variant="dark" className="justify-content-center mb-4">
-        <Navbar.Brand className="fs-3 fw-bold">🌆 Community Page</Navbar.Brand>
+        <Navbar.Brand>Community Page</Navbar.Brand>
       </Navbar>
 
-      <h2 className="text-center text-light mb-5">Select Your Community</h2>
+      <h2 className="text-center mb-4">Select Your Community</h2>
 
       <Row className="g-4 justify-content-center">
         {communities.map((community) => (
-          <Col key={community.id} md={6} lg={4} xl={3}>
-            <Card
-              className="shadow-lg community-card"
-            >
-              <Card.Body className="text-center">
-                <Card.Title className="fs-4 fw-bold">{community.name}</Card.Title>
-                <Card.Text className="text-muted">{community.area}</Card.Text>
-                <Button variant="primary" onClick={() => handleJoinCommunity(community)}>
+          <Col key={community.id} md={4} lg={3}>
+            <Card className="shadow-sm">
+              <Card.Body>
+                <Card.Title>{community.name}</Card.Title>
+                <Card.Text>{community.area}</Card.Text>
+                <Button 
+                  variant="outline-success"
+                  onClick={() => handleJoinCommunity(community)}
+                >
                   Join
                 </Button>
               </Card.Body>
@@ -39,23 +67,8 @@ const CommunityPage = () => {
           </Col>
         ))}
       </Row>
-
-      <style>
-        {`
-          .community-card {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-            border-radius: 15px;
-          }
-          .community-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 20px rgba(255, 255, 255, 0.2);
-          }
-        `}
-      </style>
     </Container>
   );
 };
 
-export default CommunityPage;
+export default CommunitySelect;
