@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap"; 
-import logo from '../assets/img/logo.svg';
+import logo from '../assets/img/logo-logo.png';
 import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg'; // Ensure correct file references
 import navIcon3 from '../assets/img/nav-icon3.svg';
@@ -67,6 +67,14 @@ const CustomNavbar = () => {
               onClick={() => onUpdateActiveLink("community")}
             >
             Community
+            </Nav.Link>
+            <Nav.Link 
+              as={Link}
+              to="/insights"
+              className={activeLink === 'insights' ? 'active navbar-link' : 'navbar-link'}
+              onClick={() => onUpdateActiveLink("insights")}
+            >
+            Insights
             </Nav.Link>
             
           </Nav>
