@@ -15,9 +15,8 @@ const Banner = () => {
       <Container>
         <Row className="align-items-center">
           <Col xs={12} md={6} xl={7}>
-            <span className="tagline">Welcome to Raptee</span>
-            {console.log(userEmail)}
-            <p>Driving the future — where innovation meets sustainability. Powered by electric, driven by purpose...</p>
+            <span className="tagline">Welcome to EVConnect</span>
+            <p>Welcome to EVConnect, your all-in-one platform for navigating the world of electric vehicles! Whether you're considering making the switch to an EV or you're a seasoned EV driver, EVConnect provides the resources and community you need to make the most of your electric journey.</p>
             <button onClick={() => console.log('connect')}>
               Let’s connect <ArrowRightCircle size={25} />
             </button>
