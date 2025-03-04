@@ -8,9 +8,8 @@ import Login from './Components/Login';
 import Log from './Components/Log';
 import InsightsDashboard from './Components/Insights';
 import CommunitySelect from './Components/CommunitySelect';
+import Footer from './Components/Footer'; // Import the Footer
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import Model from './Components/Model';
 
 function App() {
   return (
@@ -24,15 +23,16 @@ function App() {
               <Banner />
               <Skills />
               <Login />
-              
+              <Footer />  {/* Add Footer here */}
             </>
           } 
         />
-        <Route path="/communityselect" element={<CommunitySelect/>}/>
-        <Route path="/login" element={<Log />} />
-        <Route path="/insights" element={<InsightsDashboard />} />
+        <Route path="/communityselect" element={<><CommunitySelect/><Footer /></>} />
+        <Route path="/login" element={<><Log /><Footer /></>} />
+        <Route path="/insights" element={<><InsightsDashboard /><Footer /></>} />
       </Routes>
     </Router>
   );
 }
+
 export default App;
