@@ -20,6 +20,6 @@ def create_app(config_class=Config):
     from EVConnect.insights.routes import insights_bp
     
     app.register_blueprint(main)
-    app.register_blueprint(insights_bp, url_prefix='/insights')
+    app.register_blueprint(insights_bp)
 
     return app
